@@ -12,9 +12,9 @@ OK, I've marked this item as not done yet:
 
 could not find the name, start date, and/or end date of the event to add
 Got it. I've added this task:
-[E] [ ] birthday from: 21 August to: 21 August
+[E] [ ] birthday from: 2025-08-21T00:00 to: 2025-08-21T00:00
 Now you have 2 item(s) in the tracker
 Got it. I've added this task:
-[D] [ ] assignment(by: tomorrow)
+[D] [ ] assignment(by: 2025-08-22T00:00)
 Now you have 3 item(s) in the tracker
 Bye. Hope to see you again soon!

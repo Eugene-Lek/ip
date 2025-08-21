@@ -1,3 +1,5 @@
+import java.time.LocalDateTime;
+
 public interface TrackerItem {
     public void markAsCompleted();
     public void undoMarkAsCompleted();
@@ -15,12 +17,12 @@ public interface TrackerItem {
                 item = new Todo(itemName, null);
                 break;
             case "D":
-                String dueDate = entries[3];
+                LocalDateTime dueDate = DateTime.parseStringToDate(entries[3]);
                 item = new Todo(itemName, dueDate);
                 break;
             case "E":
-                String startDate = entries[3];
-                String endDate = entries[4];
+                LocalDateTime startDate = DateTime.parseStringToDate(entries[3]);
+                LocalDateTime endDate = DateTime.parseStringToDate(entries[4]);
                 item = new Event(itemName, startDate, endDate);
                 break;
             default:

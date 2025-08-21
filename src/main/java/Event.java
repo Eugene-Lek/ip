@@ -1,10 +1,12 @@
+import java.time.LocalDateTime;
+
 public class Event implements TrackerItem {
     private final String name;
-    private final String startDate;
-    private final String endDate;
+    private final LocalDateTime startDate;
+    private final LocalDateTime endDate;
     private boolean completed;
 
-    Event(String name, String startDate, String endDate) {
+    Event(String name, LocalDateTime startDate, LocalDateTime endDate) {
         this.name = name;
         this.startDate = startDate;
         this.endDate = endDate;

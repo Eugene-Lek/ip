@@ -1,3 +1,4 @@
+import java.time.LocalDateTime;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -40,7 +41,8 @@ public class Bot {
                 } else {
                     System.out.println("Unknown command");
                 }
-
+            } catch (java.time.format.DateTimeParseException e) {
+                System.err.println("Error parsing date: " + e.getMessage());
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
@@ -73,7 +75,7 @@ public class Bot {
         }
 
         String todoName = matcher.group(1);
-        String dueDate = matcher.group(2);
+        LocalDateTime dueDate = DateTime.parseStringToDate(matcher.group(2));
         Todo todo = new Todo(todoName, dueDate);
         tracker.addItem(todo);
 
@@ -91,8 +93,8 @@ public class Bot {
         }
 
         String todoName = matcher.group(1);
-        String startDate = matcher.group(2);
-        String endDate = matcher.group(3);
+        LocalDateTime startDate = DateTime.parseStringToDate(matcher.group(2));
+        LocalDateTime endDate = DateTime.parseStringToDate(matcher.group(3));
         Event event = new Event(todoName, startDate, endDate);
         tracker.addItem(event);
 
