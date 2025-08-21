@@ -1,11 +1,13 @@
-public class Todo implements Completable {
+public class Event implements Completable {
     private final String name;
-    private final String dueDate;
+    private final String startDate;
+    private final String endDate;
     private boolean completed;
 
-    Todo(String name, String dueDate) {
+    Event(String name, String startDate, String endDate) {
         this.name = name;
-        this.dueDate = dueDate;
+        this.startDate = startDate;
+        this.endDate = endDate;
         this.completed = false;
     }
 
@@ -19,6 +21,7 @@ public class Todo implements Completable {
         this.completed = false;
     }
 
+
     @Override
     public String toString() {
         String completedString = " ";
@@ -26,9 +29,6 @@ public class Todo implements Completable {
             completedString = "X";
         }
 
-        if (this.dueDate != null) {
-            return "[D] [" +  completedString + "] " + this.name + "(by: " + this.dueDate + ")";
-        }
-        return "[T] [" +  completedString + "] " + this.name;
+        return "[E] [" +  completedString + "] " + this.name + " from: " + startDate + " to: " + endDate;
     }
 }
