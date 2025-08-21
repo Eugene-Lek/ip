@@ -4,6 +4,6 @@ mark 1
 unmark 1
 list
 event birthday
-event birthday /from 21 August /to 21 August
-deadline assignment /by tomorrow
+event birthday /from 21/08 /to 21-08
+deadline assignment /by 22/08
 bye

@@ -1,9 +1,11 @@
+import java.time.LocalDateTime;
+
 public class Todo implements TrackerItem {
     private final String name;
-    private final String dueDate;
+    private final LocalDateTime dueDate;
     private boolean completed;
 
-    Todo(String name, String dueDate) {
+    Todo(String name, LocalDateTime dueDate) {
         this.name = name;
         this.dueDate = dueDate;
         this.completed = false;
