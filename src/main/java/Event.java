@@ -1,4 +1,4 @@
-public class Event implements Completable {
+public class Event implements TrackerItem {
     private final String name;
     private final String startDate;
     private final String endDate;
@@ -30,5 +30,10 @@ public class Event implements Completable {
         }
 
         return "[E] [" +  completedString + "] " + this.name + " from: " + startDate + " to: " + endDate;
+    }
+
+    @Override
+    public String toDBRepresentation() {
+        return "E" + "|" +  this.completed + "|" + this.name + "|" + startDate + "|" + endDate;
     }
 }

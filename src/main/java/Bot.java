@@ -112,7 +112,7 @@ public class Bot {
         int itemNumber = Integer.parseInt(matcher.group(1));
         tracker.markItemAsCompleted(itemNumber);
 
-        Completable markedItem = tracker.getItemByNumber(itemNumber);
+        TrackerItem markedItem = tracker.getItemByNumber(itemNumber);
         System.out.println("OK, I've marked this item as done:");
         System.out.println(markedItem);
     }
@@ -128,7 +128,7 @@ public class Bot {
         int itemNumber = Integer.parseInt(matcher.group(1));
         tracker.unmarkItemAsCompleted(itemNumber);
 
-        Completable unmarkedItem = tracker.getItemByNumber(itemNumber);
+        TrackerItem unmarkedItem = tracker.getItemByNumber(itemNumber);
         System.out.println("OK, I've marked this item as not done yet:");
         System.out.println(unmarkedItem);
     }
@@ -142,7 +142,7 @@ public class Bot {
         }
 
         int itemNumber = Integer.parseInt(matcher.group(1));
-        Completable deletedItem = tracker.deleteItem(itemNumber);
+        TrackerItem deletedItem = tracker.deleteItem(itemNumber);
 
         System.out.println("Noted. I've removed this task:");
         System.out.println(deletedItem);

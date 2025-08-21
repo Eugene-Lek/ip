@@ -1,4 +1,4 @@
-public class Todo implements Completable {
+public class Todo implements TrackerItem {
     private final String name;
     private final String dueDate;
     private boolean completed;
@@ -30,5 +30,13 @@ public class Todo implements Completable {
             return "[D] [" +  completedString + "] " + this.name + "(by: " + this.dueDate + ")";
         }
         return "[T] [" +  completedString + "] " + this.name;
+    }
+
+    @Override
+    public String toDBRepresentation() {
+        if (this.dueDate != null) {
+            return "D" + "|" + this.completed + "|" + this.name + "|" + this.dueDate;
+        }
+        return "T" + "|" + this.completed + "|" + this.name;
     }
 }
