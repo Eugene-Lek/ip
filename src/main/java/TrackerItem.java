@@ -1,12 +1,10 @@
 import java.time.LocalDateTime;
 
-public interface TrackerItem {
-    public void markAsCompleted();
-    public void undoMarkAsCompleted();
+public interface TrackerItem extends SaveableToDB {
+    void markAsCompleted();
+    void undoMarkAsCompleted();
 
-    public String toDBRepresentation();
-
-    public static TrackerItem fromDBRepresentation(String dbRepresentation) {
+    static TrackerItem fromDBRepresentation(String dbRepresentation) {
         String[] entries = dbRepresentation.split("(\\s)*\\|(\\s)*");
         String itemType = entries[0];
         boolean isCompleted = Boolean.parseBoolean(entries[1].toLowerCase());
