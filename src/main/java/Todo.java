@@ -29,7 +29,7 @@ public class Todo implements TrackerItem {
         }
 
         if (this.dueDate != null) {
-            return "[D] [" +  completedString + "] " + this.name + "(by: " + this.dueDate + ")";
+            return "[D] [" +  completedString + "] " + this.name + " (by: " + this.dueDate + ")";
         }
         return "[T] [" +  completedString + "] " + this.name;
     }
