@@ -1,3 +1,5 @@
+package storage;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -12,7 +14,7 @@ public class Storage<T extends SaveableToDB> {
     private final ArrayList<T> dataEntries;
     private final DBRepresentationParser<T> parser;
 
-    Storage(String fileName, ArrayList<T> dataEntries, DBRepresentationParser<T> parser) {
+    public Storage(String fileName, ArrayList<T> dataEntries, DBRepresentationParser<T> parser) {
         String currentDirectory = System.getProperty("user.dir");
         String dataDirectoryPath = currentDirectory + File.separator + storageDirectoryName;
         filePath = dataDirectoryPath + File.separator + fileName;
