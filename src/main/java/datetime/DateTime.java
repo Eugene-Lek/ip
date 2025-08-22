@@ -32,7 +32,7 @@ public class DateTime {
                 .toFormatter();
 
         DateTimeFormatter ISO_LOCAL_TIME = new DateTimeFormatterBuilder()
-                .appendValue(ChronoField.HOUR_OF_DAY, 2)
+                .appendValue(ChronoField.HOUR_OF_DAY, 1, 2, SignStyle.NOT_NEGATIVE)
                 .optionalStart().appendLiteral(':').optionalEnd()
                 .optionalStart().appendValue(ChronoField.MINUTE_OF_HOUR, 2).optionalEnd()
                 .optionalStart().appendLiteral(':').optionalEnd()
