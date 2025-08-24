@@ -11,11 +11,17 @@ public class Todo implements TrackerItem {
         this.completed = false;
     }
 
+    /**
+     * Marks the todo as completed
+     */
     @Override
     public void markAsCompleted() {
         this.completed = true;
     }
 
+    /**
+     * Unmarks the todo as completed
+     */
     @Override
     public void undoMarkAsCompleted() {
         this.completed = false;

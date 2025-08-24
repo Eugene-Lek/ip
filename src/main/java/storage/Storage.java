@@ -35,6 +35,9 @@ public class Storage<T extends SaveableToDB> {
         this.parser = parser;
     }
 
+    /**
+     * Loads the data stored in the DB into dataEntries
+     */
     public void loadFromDB() {
         try {
             File myObj = new File(filePath);
@@ -58,6 +61,10 @@ public class Storage<T extends SaveableToDB> {
         }
     }
 
+    /**
+     * Saves the data present in dataEntries into the DB
+     * The latest data in dataEntries overrides the data in the DB
+     */
     public void saveToDB() {
         StringBuilder latestDataEntries = new StringBuilder();
         for (T dataEntry : dataEntries) {

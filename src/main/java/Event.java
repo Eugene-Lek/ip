@@ -13,11 +13,17 @@ public class Event implements TrackerItem {
         this.completed = false;
     }
 
+    /**
+     * Marks the event as completed
+     */
     @Override
     public void markAsCompleted() {
         this.completed = true;
     }
 
+    /**
+     * Unmarks the event as completed
+     */
     @Override
     public void undoMarkAsCompleted() {
         this.completed = false;

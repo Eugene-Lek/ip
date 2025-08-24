@@ -8,6 +8,11 @@ import java.time.format.SignStyle;
 import java.time.temporal.ChronoField;
 
 public class DateTime {
+    /**
+     * Parses a datetime string into a datetime object
+     * @param dateTimeString a string that represents a datetime
+     * @return a dateTime object representing the date of the string
+     */
     public static LocalDateTime parseStringToDate(String dateTimeString) {
         DateTimeFormatter ISO_LOCAL_DATE = new DateTimeFormatterBuilder()
                 .optionalStart().appendValue(ChronoField.YEAR, 4).optionalEnd()
