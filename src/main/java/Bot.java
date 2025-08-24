@@ -5,8 +5,11 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Main class
+ */
 public class Bot {
-    private final static Tracker tracker = new Tracker();
+    private static final Tracker tracker = new Tracker();
 
     public static void main(String[] args) {
         System.out.println("Hello! I'm Laundry");
@@ -38,7 +41,7 @@ public class Bot {
                 } else if (userInput.toLowerCase().startsWith("unmark")) {
                     handleUnmarkItemAsCompleted(userInput);
 
-                } else if (userInput.toLowerCase().startsWith("delete")){
+                } else if (userInput.toLowerCase().startsWith("delete")) {
                     handleDeleteItem(userInput);
                 } else {
                     System.out.println("Unknown command");
@@ -51,7 +54,7 @@ public class Bot {
         }
     }
 
-    private static void handleAddTodo(String userInput) throws Exception{
+    private static void handleAddTodo(String userInput) throws Exception {
         String regex = "todo (.*)";
         Pattern pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
         Matcher matcher = pattern.matcher(userInput);
@@ -68,7 +71,7 @@ public class Bot {
         System.out.println("Now you have " + tracker.getItemCount() + " item(s) in the tracker");
     }
 
-    private static void handleAddTodoWithDeadline(String userInput) throws Exception{
+    private static void handleAddTodoWithDeadline(String userInput) throws Exception {
         String regex = "deadline (.*) /by (.*)";
         Pattern pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
         Matcher matcher = pattern.matcher(userInput);
@@ -86,7 +89,7 @@ public class Bot {
         System.out.println("Now you have " + tracker.getItemCount() + " item(s) in the tracker");
     }
 
-    private static void handleAddEvent(String userInput) throws Exception{
+    private static void handleAddEvent(String userInput) throws Exception {
         String regex = "event (.*) /from (.*) /to (.*)";
         Pattern pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
         Matcher matcher = pattern.matcher(userInput);
@@ -105,7 +108,7 @@ public class Bot {
         System.out.println("Now you have " + tracker.getItemCount() + " item(s) in the tracker");
     }
 
-    private static void handleMarkItemAsCompleted(String userInput) throws Exception{
+    private static void handleMarkItemAsCompleted(String userInput) throws Exception {
         String regex = "mark ([0-9]+)";
         Pattern pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
         Matcher matcher = pattern.matcher(userInput);
@@ -121,7 +124,7 @@ public class Bot {
         System.out.println(markedItem);
     }
 
-    private static void handleUnmarkItemAsCompleted(String userInput) throws Exception{
+    private static void handleUnmarkItemAsCompleted(String userInput) throws Exception {
         String regex = "unmark ([0-9]+)";
         Pattern pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
         Matcher matcher = pattern.matcher(userInput);
@@ -137,7 +140,7 @@ public class Bot {
         System.out.println(unmarkedItem);
     }
 
-    private static void handleDeleteItem(String userInput) throws Exception{
+    private static void handleDeleteItem(String userInput) throws Exception {
         String regex = "delete ([0-9]+)";
         Pattern pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
         Matcher matcher = pattern.matcher(userInput);

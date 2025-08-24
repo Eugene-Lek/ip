@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Storage<T extends SaveableToDB> {
+public class Storage<T extends SaveableToDb> {
     private static final String storageDirectoryName = "data";
 
     private final String filePath;
@@ -68,7 +68,7 @@ public class Storage<T extends SaveableToDB> {
     public void saveToDB() {
         StringBuilder latestDataEntries = new StringBuilder();
         for (T dataEntry : dataEntries) {
-            String dataEntryString = dataEntry.toDBRepresentation();
+            String dataEntryString = dataEntry.toDbRepresentation();
             latestDataEntries.append(dataEntryString);
             latestDataEntries.append("\n");
         }

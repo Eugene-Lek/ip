@@ -2,6 +2,10 @@ import storage.Storage;
 
 import java.util.ArrayList;
 
+
+/**
+ * Tracks a list of items
+ */
 public class Tracker {
     private final ArrayList<TrackerItem> items;
     private final Storage<TrackerItem> storage;
@@ -10,20 +14,22 @@ public class Tracker {
         this.items = new ArrayList<>();
 
         String dataFileName = "tracker-items.txt";
-        this.storage = new Storage<>(dataFileName, this.items, TrackerItem::fromDBRepresentation);
+        this.storage = new Storage<>(dataFileName, this.items, TrackerItem::fromDbRepresentation);
         this.storage.loadFromDB();
     }
 
     /**
      * Returns the number of items in the tracker
+     *
      * @return number of items in the tracker
      */
-    public int getItemCount () {
+    public int getItemCount() {
         return this.items.size();
     }
 
     /**
      * Adds an item to the tracker
+     *
      * @param item an item which can be tracked by the tracker
      */
     public void addItem(TrackerItem item) {
@@ -33,6 +39,7 @@ public class Tracker {
 
     /**
      * Returns an item in the tracker based on its number
+     *
      * @param itemNumber the number of the item
      * @return the corresponding item
      */
@@ -42,6 +49,7 @@ public class Tracker {
 
     /**
      * Marks an item as completed
+     *
      * @param itemNumber the number of the item
      */
     public void markItemAsCompleted(int itemNumber) {
@@ -51,6 +59,7 @@ public class Tracker {
 
     /**
      * Unmarks an item as completed
+     *
      * @param itemNumber the number of the item
      */
     public void unmarkItemAsCompleted(int itemNumber) {
@@ -60,6 +69,7 @@ public class Tracker {
 
     /**
      * Deletes an item from the tracker
+     *
      * @param itemNumber the number of the item
      */
     public TrackerItem deleteItem(int itemNumber) {
@@ -78,7 +88,7 @@ public class Tracker {
         StringBuilder display = new StringBuilder();
         for (int i = 0; i < items.size(); i++) {
             TrackerItem item = this.items.get(i);
-            String itemString = (i+1) + ". " + item.toString() + "\n";
+            String itemString = (i + 1) + ". " + item.toString() + "\n";
             display.append(itemString);
         }
 

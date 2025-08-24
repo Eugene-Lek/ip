@@ -1,5 +1,8 @@
 import java.time.LocalDateTime;
 
+/**
+ * A todo
+ */
 public class Todo implements TrackerItem {
     private final String name;
     private final LocalDateTime dueDate;
@@ -35,13 +38,13 @@ public class Todo implements TrackerItem {
         }
 
         if (this.dueDate != null) {
-            return "[D] [" +  completedString + "] " + this.name + " (by: " + this.dueDate + ")";
+            return "[D] [" + completedString + "] " + this.name + " (by: " + this.dueDate + ")";
         }
-        return "[T] [" +  completedString + "] " + this.name;
+        return "[T] [" + completedString + "] " + this.name;
     }
 
     @Override
-    public String toDBRepresentation() {
+    public String toDbRepresentation() {
         if (this.dueDate != null) {
             return "D" + "|" + this.completed + "|" + this.name + "|" + this.dueDate;
         }

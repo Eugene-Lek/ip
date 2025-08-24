@@ -10,33 +10,34 @@ import java.time.temporal.ChronoField;
 public class DateTime {
     /**
      * Parses a datetime string into a datetime object
+     *
      * @param dateTimeString a string that represents a datetime
      * @return a dateTime object representing the date of the string
      */
     public static LocalDateTime parseStringToDate(String dateTimeString) {
-        DateTimeFormatter ISO_LOCAL_DATE = new DateTimeFormatterBuilder()
+        DateTimeFormatter isoLocalDate = new DateTimeFormatterBuilder()
                 .optionalStart().appendValue(ChronoField.YEAR, 4).optionalEnd()
                 .optionalStart().appendLiteral('/').optionalEnd()
                 .optionalStart().appendLiteral('-').optionalEnd()
                 .appendValue(ChronoField.MONTH_OF_YEAR, 1, 2, SignStyle.NOT_NEGATIVE)
                 .optionalStart().appendLiteral('/').optionalEnd()
                 .optionalStart().appendLiteral('-').optionalEnd()
-                .appendValue(ChronoField.DAY_OF_MONTH,  1, 2, SignStyle.NOT_NEGATIVE)
+                .appendValue(ChronoField.DAY_OF_MONTH, 1, 2, SignStyle.NOT_NEGATIVE)
                 .parseDefaulting(ChronoField.YEAR, Year.now().getValue())
                 .toFormatter();
 
-        DateTimeFormatter DAY_MONTH_YEAR = new DateTimeFormatterBuilder()
-                .appendValue(ChronoField.DAY_OF_MONTH,  1, 2, SignStyle.NOT_NEGATIVE)
+        DateTimeFormatter dayMonthYear = new DateTimeFormatterBuilder()
+                .appendValue(ChronoField.DAY_OF_MONTH, 1, 2, SignStyle.NOT_NEGATIVE)
                 .optionalStart().appendLiteral('/').optionalEnd()
                 .optionalStart().appendLiteral('-').optionalEnd()
-                .appendValue(ChronoField.MONTH_OF_YEAR,  1, 2, SignStyle.NOT_NEGATIVE)
+                .appendValue(ChronoField.MONTH_OF_YEAR, 1, 2, SignStyle.NOT_NEGATIVE)
                 .optionalStart().appendLiteral('/').optionalEnd()
                 .optionalStart().appendLiteral('-').optionalEnd()
                 .optionalStart().appendValue(ChronoField.YEAR, 4).optionalEnd()
                 .parseDefaulting(ChronoField.YEAR, Year.now().getValue())
                 .toFormatter();
 
-        DateTimeFormatter ISO_LOCAL_TIME = new DateTimeFormatterBuilder()
+        DateTimeFormatter isoLocalTime = new DateTimeFormatterBuilder()
                 .appendValue(ChronoField.HOUR_OF_DAY, 1, 2, SignStyle.NOT_NEGATIVE)
                 .optionalStart().appendLiteral(':').optionalEnd()
                 .optionalStart().appendValue(ChronoField.MINUTE_OF_HOUR, 2).optionalEnd()
@@ -46,20 +47,20 @@ public class DateTime {
                 .toFormatter();
 
         DateTimeFormatter isoDateTimeFormatter = new DateTimeFormatterBuilder()
-                .appendOptional(ISO_LOCAL_DATE)
+                .appendOptional(isoLocalDate)
                 .optionalStart().appendLiteral(' ').optionalEnd()
                 .optionalStart().appendLiteral('T').optionalEnd()
-                .optionalStart().appendOptional(ISO_LOCAL_TIME).optionalEnd()
+                .optionalStart().appendOptional(isoLocalTime).optionalEnd()
                 .parseDefaulting(ChronoField.HOUR_OF_DAY, 0)
                 .parseDefaulting(ChronoField.MINUTE_OF_HOUR, 0)
                 .parseDefaulting(ChronoField.SECOND_OF_MINUTE, 0)
                 .toFormatter();
 
         DateTimeFormatter dayMonthYearDateTimeFormatter = new DateTimeFormatterBuilder()
-                .appendOptional(DAY_MONTH_YEAR)
+                .appendOptional(dayMonthYear)
                 .optionalStart().appendLiteral(' ').optionalEnd()
                 .optionalStart().appendLiteral('T').optionalEnd()
-                .optionalStart().appendOptional(ISO_LOCAL_TIME).optionalEnd()
+                .optionalStart().appendOptional(isoLocalTime).optionalEnd()
                 .parseDefaulting(ChronoField.HOUR_OF_DAY, 0)
                 .parseDefaulting(ChronoField.MINUTE_OF_HOUR, 0)
                 .parseDefaulting(ChronoField.SECOND_OF_MINUTE, 0)

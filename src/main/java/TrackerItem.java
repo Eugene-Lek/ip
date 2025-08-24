@@ -1,13 +1,17 @@
 import datetime.DateTime;
-import storage.SaveableToDB;
+import storage.SaveableToDb;
 
 import java.time.LocalDateTime;
 
-public interface TrackerItem extends SaveableToDB {
+/**
+ * An interface to define the functionality of a tracker item
+ */
+public interface TrackerItem extends SaveableToDb {
     void markAsCompleted();
+
     void undoMarkAsCompleted();
 
-    static TrackerItem fromDBRepresentation(String dbRepresentation) {
+    static TrackerItem fromDbRepresentation(String dbRepresentation) {
         String[] entries = dbRepresentation.split("(\\s)*\\|(\\s)*");
         String itemType = entries[0];
         boolean isCompleted = Boolean.parseBoolean(entries[1].toLowerCase());

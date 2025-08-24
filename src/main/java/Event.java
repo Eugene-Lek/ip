@@ -1,5 +1,8 @@
 import java.time.LocalDateTime;
 
+/**
+ * An event
+ */
 public class Event implements TrackerItem {
     private final String name;
     private final LocalDateTime startDate;
@@ -37,11 +40,11 @@ public class Event implements TrackerItem {
             completedString = "X";
         }
 
-        return "[E] [" +  completedString + "] " + this.name + " from: " + startDate + " to: " + endDate;
+        return "[E] [" + completedString + "] " + this.name + " from: " + startDate + " to: " + endDate;
     }
 
     @Override
-    public String toDBRepresentation() {
-        return "E" + "|" +  this.completed + "|" + this.name + "|" + startDate + "|" + endDate;
+    public String toDbRepresentation() {
+        return "E" + "|" + this.completed + "|" + this.name + "|" + startDate + "|" + endDate;
     }
 }
