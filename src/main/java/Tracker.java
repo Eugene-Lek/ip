@@ -1,7 +1,6 @@
-import storage.Storage;
-
 import java.util.ArrayList;
 
+import storage.Storage;
 
 /**
  * Tracks a list of items

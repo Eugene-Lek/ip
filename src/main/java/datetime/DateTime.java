@@ -7,6 +7,9 @@ import java.time.format.DateTimeFormatterBuilder;
 import java.time.format.SignStyle;
 import java.time.temporal.ChronoField;
 
+/**
+ * Provides DateTime utilities
+ */
 public class DateTime {
     /**
      * Parses a datetime string into a datetime object

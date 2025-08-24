@@ -7,14 +7,17 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Storage<T extends SaveableToDb> {
+/**
+ * Links an array of data entries to a DB
+ */
+public class Storage<T extends SavableToDb> {
     private static final String storageDirectoryName = "data";
 
     private final String filePath;
     private final ArrayList<T> dataEntries;
-    private final DBRepresentationParser<T> parser;
+    private final DbRepresentationParser<T> parser;
 
-    public Storage(String fileName, ArrayList<T> dataEntries, DBRepresentationParser<T> parser) {
+    public Storage(String fileName, ArrayList<T> dataEntries, DbRepresentationParser<T> parser) {
         String currentDirectory = System.getProperty("user.dir");
         String dataDirectoryPath = currentDirectory + File.separator + storageDirectoryName;
         filePath = dataDirectoryPath + File.separator + fileName;

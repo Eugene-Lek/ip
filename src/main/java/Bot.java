@@ -1,9 +1,9 @@
-import datetime.DateTime;
-
 import java.time.LocalDateTime;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import datetime.DateTime;
 
 /**
  * Main class
