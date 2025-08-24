@@ -7,6 +7,8 @@ import storage.SavableToDb;
  * An interface to define the functionality of a tracker item
  */
 public interface TrackerItem extends SavableToDb {
+    String getName();
+
     void markAsCompleted();
 
     void undoMarkAsCompleted();

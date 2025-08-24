@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.List;
 
 import storage.Storage;
 
@@ -6,7 +7,7 @@ import storage.Storage;
  * Tracks a list of items
  */
 public class Tracker {
-    private final ArrayList<TrackerItem> items;
+    private final List<TrackerItem> items;
     private final Storage<TrackerItem> storage;
 
     Tracker() {
@@ -77,7 +78,19 @@ public class Tracker {
         return removedItem;
     }
 
-
+    /**
+     * Returns a list of tracker items whose names contain the search query
+     *
+     * @param query a search query
+     * @return a list of tracker items whose names contain the search query
+     */
+    public List<TrackerItem> find(String query) {
+        return this.items
+                .stream()
+                .filter(item -> item.getName().toLowerCase().contains(query.toLowerCase()))
+                .toList();
+    }
+    
     @Override
     public String toString() {
         if (items.isEmpty()) {

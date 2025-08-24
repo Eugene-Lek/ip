@@ -4,7 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -14,10 +14,10 @@ public class Storage<T extends SavableToDb> {
     private static final String storageDirectoryName = "data";
 
     private final String filePath;
-    private final ArrayList<T> dataEntries;
+    private final List<T> dataEntries;
     private final DbRepresentationParser<T> parser;
 
-    public Storage(String fileName, ArrayList<T> dataEntries, DbRepresentationParser<T> parser) {
+    public Storage(String fileName, List<T> dataEntries, DbRepresentationParser<T> parser) {
         String currentDirectory = System.getProperty("user.dir");
         String dataDirectoryPath = currentDirectory + File.separator + storageDirectoryName;
         filePath = dataDirectoryPath + File.separator + fileName;

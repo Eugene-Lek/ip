@@ -17,6 +17,14 @@ public class Event implements TrackerItem {
     }
 
     /**
+     * Gets the name of the event
+     */
+    @Override
+    public String getName() {
+        return this.name;
+    }
+
+    /**
      * Marks the event as completed
      */
     @Override

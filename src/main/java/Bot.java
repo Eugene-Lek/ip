@@ -1,4 +1,5 @@
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -18,31 +19,36 @@ public class Bot {
         Scanner userInputScanner = new Scanner(System.in);
         while (true) {
             String userInput = userInputScanner.nextLine();
+            String command = userInput.toLowerCase().split(" ")[0];
 
             try {
-                if (userInput.equalsIgnoreCase("bye")) {
+                if (command.equalsIgnoreCase("bye")) {
                     System.out.println("Bye. Hope to see you again soon!");
                     break;
-                } else if (userInput.toLowerCase().startsWith("todo")) {
+                } else if (command.equalsIgnoreCase("todo")) {
                     handleAddTodo(userInput);
 
-                } else if (userInput.toLowerCase().startsWith("deadline")) {
+                } else if (command.equalsIgnoreCase("deadline")) {
                     handleAddTodoWithDeadline(userInput);
 
-                } else if (userInput.toLowerCase().startsWith("event")) {
+                } else if (command.equalsIgnoreCase("event")) {
                     handleAddEvent(userInput);
 
                 } else if (userInput.equalsIgnoreCase("list")) {
                     System.out.println(tracker);
 
-                } else if (userInput.toLowerCase().startsWith("mark")) {
+                } else if (command.equalsIgnoreCase("mark")) {
                     handleMarkItemAsCompleted(userInput);
 
-                } else if (userInput.toLowerCase().startsWith("unmark")) {
+                } else if (command.equalsIgnoreCase("unmark")) {
                     handleUnmarkItemAsCompleted(userInput);
 
-                } else if (userInput.toLowerCase().startsWith("delete")) {
+                } else if (command.equalsIgnoreCase("delete")) {
                     handleDeleteItem(userInput);
+
+                } else if (command.equalsIgnoreCase("find")) {
+                    handleFindItems(userInput);
+
                 } else {
                     System.out.println("Unknown command");
                 }
@@ -154,5 +160,29 @@ public class Bot {
         System.out.println("Noted. I've removed this task:");
         System.out.println(deletedItem);
         System.out.println("Now you have " + tracker.getItemCount() + " item(s) in the tracker");
+    }
+
+    private static void handleFindItems(String userInput) throws Exception {
+        String regex = "find (.*)";
+        Pattern pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
+        Matcher matcher = pattern.matcher(userInput);
+        if (!matcher.find()) {
+            throw new Exception("could not find the item number to delete");
+        }
+
+        List<TrackerItem> matchedItems = tracker.find(matcher.group(1));
+        if (matchedItems.isEmpty()) {
+            System.out.println("No items match the given query");
+        }
+
+        StringBuilder display = new StringBuilder();
+        for (int i = 0; i < matchedItems.size(); i++) {
+            TrackerItem item = matchedItems.get(i);
+            String itemString = (i + 1) + ". " + item.toString() + "\n";
+            display.append(itemString);
+        }
+
+        System.out.println("Here are the matching items in your tracker");
+        System.out.println(display);
     }
 }

@@ -15,6 +15,14 @@ public class Todo implements TrackerItem {
     }
 
     /**
+     * Gets the name of the todo
+     */
+    @Override
+    public String getName() {
+        return this.name;
+    }
+
+    /**
      * Marks the todo as completed
      */
     @Override
