@@ -43,7 +43,11 @@ test {
 }
 
 application {
-    mainClass.set("Bot")
+    mainClass.set("bot.Launcher")
+}
+
+checkstyle {
+    toolVersion = '11.0.0'
 }
 
 shadowJar {
