@@ -1,3 +1,5 @@
+package bot;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -90,7 +92,7 @@ public class Tracker {
                 .filter(item -> item.getName().toLowerCase().contains(query.toLowerCase()))
                 .toList();
     }
-    
+
     @Override
     public String toString() {
         if (items.isEmpty()) {

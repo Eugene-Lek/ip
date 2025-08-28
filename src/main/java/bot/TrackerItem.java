@@ -1,3 +1,5 @@
+package bot;
+
 import java.time.LocalDateTime;
 
 import datetime.DateTime;
@@ -39,7 +41,7 @@ public interface TrackerItem extends SavableToDb {
             item = new Event(itemName, startDate, endDate);
             break;
         default:
-            System.out.println("Warning: The following file entry does not contain a valid Tracker Item type: " + dbRepresentation);
+            System.out.println("Warning: The following file entry does not contain a valid bot.Tracker Item type: " + dbRepresentation);
             return null;
         }
 
