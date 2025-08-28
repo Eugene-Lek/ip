@@ -2,7 +2,6 @@ package bot;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -14,55 +13,58 @@ import datetime.DateTime;
 public class Bot {
     private static final Tracker tracker = new Tracker();
 
-    public static void main(String[] args) {
-        System.out.println("Hello! I'm Laundry");
-        System.out.println("What can I do for you?");
+    // Just use the same tracker instance for all bot instances
+    // This is okay since we will only instantiate bot once
+    // Anyway, there can only be 1 tracker instance since all tracker instances
+    // are tied to the same data file
+    public Bot() {
+    }
 
-        Scanner userInputScanner = new Scanner(System.in);
-        while (true) {
-            String userInput = userInputScanner.nextLine();
-            String command = userInput.toLowerCase().split(" ")[0];
+    /**
+     * Handles the user input
+     *
+     * @param userInput the user's input
+     * @return the bot's response
+     */
+    public String getResponse(String userInput) {
+        String command = userInput.toLowerCase().split(" ")[0];
 
-            try {
-                if (command.equalsIgnoreCase("bye")) {
-                    System.out.println("Bye. Hope to see you again soon!");
-                    break;
-                } else if (command.equalsIgnoreCase("todo")) {
-                    handleAddTodo(userInput);
+        try {
+            if (command.equalsIgnoreCase("todo")) {
+                return handleAddTodo(userInput);
 
-                } else if (command.equalsIgnoreCase("deadline")) {
-                    handleAddTodoWithDeadline(userInput);
+            } else if (command.equalsIgnoreCase("deadline")) {
+                return handleAddTodoWithDeadline(userInput);
 
-                } else if (command.equalsIgnoreCase("event")) {
-                    handleAddEvent(userInput);
+            } else if (command.equalsIgnoreCase("event")) {
+                return handleAddEvent(userInput);
 
-                } else if (userInput.equalsIgnoreCase("list")) {
-                    System.out.println(tracker);
+            } else if (userInput.equalsIgnoreCase("list")) {
+                return tracker.toString();
 
-                } else if (command.equalsIgnoreCase("mark")) {
-                    handleMarkItemAsCompleted(userInput);
+            } else if (command.equalsIgnoreCase("mark")) {
+                return handleMarkItemAsCompleted(userInput);
 
-                } else if (command.equalsIgnoreCase("unmark")) {
-                    handleUnmarkItemAsCompleted(userInput);
+            } else if (command.equalsIgnoreCase("unmark")) {
+                return handleUnmarkItemAsCompleted(userInput);
 
-                } else if (command.equalsIgnoreCase("delete")) {
-                    handleDeleteItem(userInput);
+            } else if (command.equalsIgnoreCase("delete")) {
+                return handleDeleteItem(userInput);
 
-                } else if (command.equalsIgnoreCase("find")) {
-                    handleFindItems(userInput);
+            } else if (command.equalsIgnoreCase("find")) {
+                return handleFindItems(userInput);
 
-                } else {
-                    System.out.println("Unknown command");
-                }
-            } catch (java.time.format.DateTimeParseException e) {
-                System.err.println("Error parsing date: " + e.getMessage());
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
+            } else {
+                return "Unknown command";
             }
+        } catch (java.time.format.DateTimeParseException e) {
+            return "Error parsing date: " + e.getMessage();
+        } catch (Exception e) {
+            return e.getMessage();
         }
     }
 
-    private static void handleAddTodo(String userInput) throws Exception {
+    private String handleAddTodo(String userInput) throws Exception {
         String regex = "todo (.*)";
         Pattern pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
         Matcher matcher = pattern.matcher(userInput);
@@ -74,12 +76,12 @@ public class Bot {
         Todo todo = new Todo(todoName, null);
         tracker.addItem(todo);
 
-        System.out.println("Got it. I've added this task:");
-        System.out.println(todo);
-        System.out.println("Now you have " + tracker.getItemCount() + " item(s) in the tracker");
+        return "Got it. I've added this task:" + "\n"
+                + todo + "\n"
+                + "Now you have " + tracker.getItemCount() + " item(s) in the tracker";
     }
 
-    private static void handleAddTodoWithDeadline(String userInput) throws Exception {
+    private String handleAddTodoWithDeadline(String userInput) throws Exception {
         String regex = "deadline (.*) /by (.*)";
         Pattern pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
         Matcher matcher = pattern.matcher(userInput);
@@ -92,12 +94,12 @@ public class Bot {
         Todo todo = new Todo(todoName, dueDate);
         tracker.addItem(todo);
 
-        System.out.println("Got it. I've added this task:");
-        System.out.println(todo);
-        System.out.println("Now you have " + tracker.getItemCount() + " item(s) in the tracker");
+        return "Got it. I've added this task:" + "\n"
+                + todo + "\n"
+                + "Now you have " + tracker.getItemCount() + " item(s) in the tracker";
     }
 
-    private static void handleAddEvent(String userInput) throws Exception {
+    private String handleAddEvent(String userInput) throws Exception {
         String regex = "event (.*) /from (.*) /to (.*)";
         Pattern pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
         Matcher matcher = pattern.matcher(userInput);
@@ -111,12 +113,12 @@ public class Bot {
         Event event = new Event(todoName, startDate, endDate);
         tracker.addItem(event);
 
-        System.out.println("Got it. I've added this task:");
-        System.out.println(event);
-        System.out.println("Now you have " + tracker.getItemCount() + " item(s) in the tracker");
+        return "Got it. I've added this task:" + "\n"
+                + event + "\n"
+                + "Now you have " + tracker.getItemCount() + " item(s) in the tracker";
     }
 
-    private static void handleMarkItemAsCompleted(String userInput) throws Exception {
+    private String handleMarkItemAsCompleted(String userInput) throws Exception {
         String regex = "mark ([0-9]+)";
         Pattern pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
         Matcher matcher = pattern.matcher(userInput);
@@ -128,11 +130,11 @@ public class Bot {
         tracker.markItemAsCompleted(itemNumber);
 
         TrackerItem markedItem = tracker.getItemByNumber(itemNumber);
-        System.out.println("OK, I've marked this item as done:");
-        System.out.println(markedItem);
+        return "OK, I've marked this item as done:" + "\n"
+                + markedItem;
     }
 
-    private static void handleUnmarkItemAsCompleted(String userInput) throws Exception {
+    private String handleUnmarkItemAsCompleted(String userInput) throws Exception {
         String regex = "unmark ([0-9]+)";
         Pattern pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
         Matcher matcher = pattern.matcher(userInput);
@@ -144,11 +146,11 @@ public class Bot {
         tracker.unmarkItemAsCompleted(itemNumber);
 
         TrackerItem unmarkedItem = tracker.getItemByNumber(itemNumber);
-        System.out.println("OK, I've marked this item as not done yet:");
-        System.out.println(unmarkedItem);
+        return "OK, I've marked this item as not done yet:" + "\n"
+                + unmarkedItem;
     }
 
-    private static void handleDeleteItem(String userInput) throws Exception {
+    private String handleDeleteItem(String userInput) throws Exception {
         String regex = "delete ([0-9]+)";
         Pattern pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
         Matcher matcher = pattern.matcher(userInput);
@@ -159,12 +161,12 @@ public class Bot {
         int itemNumber = Integer.parseInt(matcher.group(1));
         TrackerItem deletedItem = tracker.deleteItem(itemNumber);
 
-        System.out.println("Noted. I've removed this task:");
-        System.out.println(deletedItem);
-        System.out.println("Now you have " + tracker.getItemCount() + " item(s) in the tracker");
+        return "Noted. I've removed this task:" + "\n"
+                + deletedItem + "\n"
+                + "Now you have " + tracker.getItemCount() + " item(s) in the tracker";
     }
 
-    private static void handleFindItems(String userInput) throws Exception {
+    private String handleFindItems(String userInput) throws Exception {
         String regex = "find (.*)";
         Pattern pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
         Matcher matcher = pattern.matcher(userInput);
@@ -184,7 +186,7 @@ public class Bot {
             display.append(itemString);
         }
 
-        System.out.println("Here are the matching items in your tracker");
-        System.out.println(display);
+        return "Here are the matching items in your tracker" + "\n"
+                + display;
     }
 }

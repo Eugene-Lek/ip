@@ -5,7 +5,6 @@ import java.io.IOException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -13,6 +12,7 @@ import javafx.stage.Stage;
  * Represents the GUI of the bot application
  */
 public class Gui extends Application {
+    private final Bot bot = new Bot();
 
     @Override
     public void start(Stage stage) {
@@ -21,7 +21,7 @@ public class Gui extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
-            fxmlLoader.<MainWindow>getController().setDuke(duke);  // inject the Duke instance
+            fxmlLoader.<MainWindow>getController().setBot(bot);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
