@@ -9,13 +9,13 @@ public class Event implements TrackerItem {
     private final String name;
     private final LocalDateTime startDate;
     private final LocalDateTime endDate;
-    private boolean completed;
+    private boolean isCompleted;
 
     Event(String name, LocalDateTime startDate, LocalDateTime endDate) {
         this.name = name;
         this.startDate = startDate;
         this.endDate = endDate;
-        this.completed = false;
+        this.isCompleted = false;
     }
 
     /**
@@ -31,7 +31,7 @@ public class Event implements TrackerItem {
      */
     @Override
     public void markAsCompleted() {
-        this.completed = true;
+        this.isCompleted = true;
     }
 
     /**
@@ -39,14 +39,14 @@ public class Event implements TrackerItem {
      */
     @Override
     public void undoMarkAsCompleted() {
-        this.completed = false;
+        this.isCompleted = false;
     }
 
 
     @Override
     public String toString() {
         String completedString = " ";
-        if (this.completed) {
+        if (this.isCompleted) {
             completedString = "X";
         }
 
@@ -55,6 +55,6 @@ public class Event implements TrackerItem {
 
     @Override
     public String toDbRepresentation() {
-        return "E" + "|" + this.completed + "|" + this.name + "|" + startDate + "|" + endDate;
+        return "E" + "|" + this.isCompleted + "|" + this.name + "|" + startDate + "|" + endDate;
     }
 }

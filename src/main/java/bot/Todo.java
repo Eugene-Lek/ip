@@ -8,12 +8,12 @@ import java.time.LocalDateTime;
 public class Todo implements TrackerItem {
     private final String name;
     private final LocalDateTime dueDate;
-    private boolean completed;
+    private boolean isCompleted;
 
     Todo(String name, LocalDateTime dueDate) {
         this.name = name;
         this.dueDate = dueDate;
-        this.completed = false;
+        this.isCompleted = false;
     }
 
     /**
@@ -29,7 +29,7 @@ public class Todo implements TrackerItem {
      */
     @Override
     public void markAsCompleted() {
-        this.completed = true;
+        this.isCompleted = true;
     }
 
     /**
@@ -37,13 +37,13 @@ public class Todo implements TrackerItem {
      */
     @Override
     public void undoMarkAsCompleted() {
-        this.completed = false;
+        this.isCompleted = false;
     }
 
     @Override
     public String toString() {
         String completedString = " ";
-        if (this.completed) {
+        if (this.isCompleted) {
             completedString = "X";
         }
 
@@ -56,8 +56,8 @@ public class Todo implements TrackerItem {
     @Override
     public String toDbRepresentation() {
         if (this.dueDate != null) {
-            return "D" + "|" + this.completed + "|" + this.name + "|" + this.dueDate;
+            return "D" + "|" + this.isCompleted + "|" + this.name + "|" + this.dueDate;
         }
-        return "T" + "|" + this.completed + "|" + this.name;
+        return "T" + "|" + this.isCompleted + "|" + this.name;
     }
 }
