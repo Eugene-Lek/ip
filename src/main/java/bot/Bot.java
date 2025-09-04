@@ -12,12 +12,18 @@ import datetime.DateTime;
  */
 public class Bot {
     private static final Tracker tracker = new Tracker();
+    private static int totalNumBot = 0;
 
-    // Just use the same tracker instance for all bot instances
-    // This is okay since we will only instantiate bot once
-    // Anyway, there can only be 1 tracker instance since all tracker instances
-    // are tied to the same data file
+    /**
+     * Constructor.
+     * We use the same tracker instance for all bot instances
+     * This is okay since we will only instantiate bot once
+     * Anyway, there can only be 1 tracker instance since all tracker instances
+     * are tied to the same data file
+     */
     public Bot() {
+        assert totalNumBot < 1;
+        totalNumBot++;
     }
 
     /**

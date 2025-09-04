@@ -41,7 +41,7 @@ public interface TrackerItem extends SavableToDb {
             item = new Event(itemName, startDate, endDate);
             break;
         default:
-            System.out.println("Warning: The following file entry does not contain a valid bot.Tracker Item type: " + dbRepresentation);
+            assert true : "Warning: The following file entry does not contain a valid bot.Tracker Item type";
             return null;
         }
 
