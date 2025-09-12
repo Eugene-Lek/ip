@@ -2,6 +2,7 @@ package bot;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.lang.IndexOutOfBoundsException;
 
 import storage.Storage;
 
@@ -45,8 +46,12 @@ public class Tracker {
      * @param itemNumber the number of the item
      * @return the corresponding item
      */
-    public TrackerItem getItemByNumber(int itemNumber) {
-        return this.items.get(itemNumber - 1);
+    public TrackerItem getItemByNumber(int itemNumber) throws Exception {
+        try {
+            return this.items.get(itemNumber - 1);
+        } catch (IndexOutOfBoundsException e) {
+            throw new Exception("The item number does not exist in the tracker");
+        }
     }
 
     /**
@@ -54,8 +59,13 @@ public class Tracker {
      *
      * @param itemNumber the number of the item
      */
-    public void markItemAsCompleted(int itemNumber) {
-        this.items.get(itemNumber - 1).markAsCompleted();
+    public void markItemAsCompleted(int itemNumber) throws Exception {
+        try {
+            this.items.get(itemNumber - 1).markAsCompleted();
+        } catch (IndexOutOfBoundsException e) {
+            throw new Exception("The item number does not exist in the tracker");
+        }
+
         this.storage.saveToDB();
     }
 
@@ -64,8 +74,12 @@ public class Tracker {
      *
      * @param itemNumber the number of the item
      */
-    public void unmarkItemAsCompleted(int itemNumber) {
-        this.items.get(itemNumber - 1).undoMarkAsCompleted();
+    public void unmarkItemAsCompleted(int itemNumber) throws Exception {
+        try {
+            this.items.get(itemNumber - 1).undoMarkAsCompleted();
+        } catch (IndexOutOfBoundsException e) {
+            throw new Exception("The item number does not exist in the tracker");
+        }
         this.storage.saveToDB();
     }
 
@@ -74,8 +88,14 @@ public class Tracker {
      *
      * @param itemNumber the number of the item
      */
-    public TrackerItem deleteItem(int itemNumber) {
-        TrackerItem removedItem = this.items.remove(itemNumber - 1);
+    public TrackerItem deleteItem(int itemNumber) throws Exception {
+        TrackerItem removedItem;
+        try {
+            removedItem = this.items.remove(itemNumber - 1);
+        } catch (IndexOutOfBoundsException e) {
+            throw new Exception("The item number does not exist in the tracker");
+        }
+
         this.storage.saveToDB();
         return removedItem;
     }
