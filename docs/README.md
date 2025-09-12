@@ -5,7 +5,7 @@ Command Line Interface (CLI), so if you can type fast, you can manage your tasks
 
 ## Quick Start
 
-1. Ensure you have Java `11` or above installed on your computer.
+1. Ensure you have Java `17` installed on your computer.
 2. Download the latest `bot.jar` file from the release page
 3. Open a command terminal, `cd` into the folder you put the jar file in.
 4. Run the application using the `java -jar bot.jar` command.
