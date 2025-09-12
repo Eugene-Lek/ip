@@ -61,6 +61,8 @@ public class Storage<T extends SavableToDb> {
             reader.close();
         } catch (FileNotFoundException e) {
             System.out.println("An error occurred in loading data from the file.");
+        } catch (Exception err) {
+            System.out.println("An error occurred in parsing the data");
         }
     }
 

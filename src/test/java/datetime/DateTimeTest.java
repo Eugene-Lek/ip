@@ -1,28 +1,27 @@
 package datetime;
 
+import java.time.LocalDateTime;
+import java.util.stream.Stream;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
-
-import java.time.LocalDateTime;
-import java.time.format.DateTimeParseException;
-import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class DateTimeTest {
 
     @Test
-    void testParseStringToDateEmptyInput() {
-        assertThrows(DateTimeParseException.class, () -> {
+    void testParseStringToDateEmptyInput() throws Exception {
+        assertThrows(Exception.class, () -> {
             DateTime.parseStringToDate("");
         });
     }
 
     @Test
-    void testParseStringToDateWhitespaceInput() {
-        assertThrows(DateTimeParseException.class, () -> {
+    void testParseStringToDateWhitespaceInput() throws Exception {
+        assertThrows(Exception.class, () -> {
             DateTime.parseStringToDate("   ");
         });
     }
@@ -35,15 +34,15 @@ class DateTimeTest {
             "2023/13/01", // Invalid month
             "abc-def-ghi" // Complete nonsense
     })
-    void testParseStringToDateInvalidFormats(String invalidDate) {
-        assertThrows(DateTimeParseException.class, () -> {
+    void testParseStringToDateInvalidFormats(String invalidDate) throws Exception {
+        assertThrows(Exception.class, () -> {
             DateTime.parseStringToDate(invalidDate);
         });
     }
 
     @ParameterizedTest
     @MethodSource("validIsoDateProvider")
-    void testParseStringToDateIsoFormats(String dateString, LocalDateTime expected) {
+    void testParseStringToDateIsoFormats(String dateString, LocalDateTime expected) throws Exception {
         LocalDateTime result = DateTime.parseStringToDate(dateString);
         assertEquals(expected, result);
     }
@@ -83,7 +82,7 @@ class DateTimeTest {
     }
 
     @Test
-    void testParseStringToDateMonthDayOnly() {
+    void testParseStringToDateMonthDayOnly() throws Exception {
         // This test assumes current year
         int currentYear = LocalDateTime.now().getYear();
         LocalDateTime result = DateTime.parseStringToDate("12-25");
@@ -92,7 +91,7 @@ class DateTimeTest {
     }
 
     @Test
-    void testParseStringToDateWithDifferentSeparatorsMixed() {
+    void testParseStringToDateWithDifferentSeparatorsMixed() throws Exception {
         LocalDateTime result1 = DateTime.parseStringToDate("2023-12/25 14:30:45");
         LocalDateTime expected1 = LocalDateTime.of(2023, 12, 25, 14, 30, 45);
         assertEquals(expected1, result1);
@@ -112,7 +111,7 @@ class DateTimeTest {
     }
 
     @Test
-    void testParseStringToDateLeapYear() {
+    void testParseStringToDateLeapYear() throws Exception {
         LocalDateTime result = DateTime.parseStringToDate("2024-02-29"); // Leap year
         LocalDateTime expected = LocalDateTime.of(2024, 2, 29, 0, 0, 0);
         assertEquals(expected, result);
@@ -120,7 +119,7 @@ class DateTimeTest {
 
     @ParameterizedTest
     @MethodSource("edgeCaseDateProvider")
-    void testParseStringToDateEdgeCases(String dateString, LocalDateTime expected) {
+    void testParseStringToDateEdgeCases(String dateString, LocalDateTime expected) throws Exception {
         LocalDateTime result = DateTime.parseStringToDate(dateString);
         assertEquals(expected, result);
     }
@@ -136,8 +135,8 @@ class DateTimeTest {
 
     @ParameterizedTest
     @MethodSource("timeOnlyProvider")
-    void testParseStringToDateTimeOnlyShouldFail(String timeOnlyString) {
-        assertThrows(DateTimeParseException.class, () -> {
+    void testParseStringToDateTimeOnlyShouldFail(String timeOnlyString) throws Exception {
+        assertThrows(Exception.class, () -> {
             DateTime.parseStringToDate(timeOnlyString);
         });
     }

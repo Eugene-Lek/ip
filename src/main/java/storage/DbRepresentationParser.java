@@ -5,5 +5,5 @@ package storage;
  */
 @FunctionalInterface
 public interface DbRepresentationParser<T> {
-    T parse(String dbRepresentation);
+    T parse(String dbRepresentation) throws Exception;
 }

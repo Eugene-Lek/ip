@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TodoTest {
     @Test
-    public void TestTodoWithoutDeadlineToDBRepresentation() {
+    public void TestTodoWithoutDeadlineToDbRepresentation() {
         Todo todo = new Todo("Item &*@^$@% HJSKF HIU*(#@34", null);
         String actual = todo.toDbRepresentation();
         String expected = "T|false|Item &*@^$@% HJSKF HIU*(#@34";
@@ -17,7 +17,7 @@ public class TodoTest {
     }
 
     @Test
-    public void TestTodoWithDeadlineToDBRepresentation() {
+    public void TestTodoWithDeadlineToDbRepresentation() {
         Todo todo = new Todo("fkjaewhr erkj2n 3 '3498p ad  c uwthfrsd", LocalDateTime.of(2001, Month.MARCH, 12, 14, 30));
         todo.markAsCompleted();
         String actual = todo.toDbRepresentation();
@@ -30,7 +30,7 @@ public class TodoTest {
      * This is an edge case to ensure the method doesn't crash and handles empty strings correctly.
      */
     @Test
-    public void TestTodoWithEmptyNameToDBRepresentation() {
+    public void TestTodoWithEmptyNameToDbRepresentation() {
         Todo todo = new Todo("", LocalDateTime.of(2023, Month.DECEMBER, 25, 23, 59));
         String actual = todo.toDbRepresentation();
         String expected = "D|false||2023-12-25T23:59";
@@ -42,7 +42,7 @@ public class TodoTest {
      * This is crucial to ensure the storage format won't be corrupted by the data itself.
      */
     @Test
-    public void TestTodoWithNameContainingDelimiterToDBRepresentation() {
+    public void TestTodoWithNameContainingDelimiterToDbRepresentation() {
         Todo todo = new Todo("Buy pipe | connector", null);
         String actual = todo.toDbRepresentation();
         String expected = "T|false|Buy pipe | connector";
@@ -54,7 +54,7 @@ public class TodoTest {
      * This ensures the initial state (isCompleted = false) is correctly serialized.
      */
     @Test
-    public void TestUncompletedTodoWithDeadlineToDBRepresentation() {
+    public void TestUncompletedTodoWithDeadlineToDbRepresentation() {
         Todo todo = new Todo("Submit report", LocalDateTime.of(2024, Month.JULY, 1, 9, 0));
         // Intentionally not marking as completed
         String actual = todo.toDbRepresentation();
@@ -67,7 +67,7 @@ public class TodoTest {
      * This covers the combination of T-type with the completed state.
      */
     @Test
-    public void TestCompletedTodoWithoutDeadlineToDBRepresentation() {
+    public void TestCompletedTodoWithoutDeadlineToDbRepresentation() {
         Todo todo = new Todo("Call mom", null);
         todo.markAsCompleted();
         String actual = todo.toDbRepresentation();
@@ -80,7 +80,7 @@ public class TodoTest {
      * This verifies the undoMarkAsCompleted() method works and is correctly reflected in the serialization.
      */
     @Test
-    public void TestUndoneTodoToDBRepresentation() {
+    public void TestUndoneTodoToDbRepresentation() {
         Todo todo = new Todo("Task with state change", LocalDateTime.of(2024, Month.JANUARY, 10, 12, 0));
         todo.markAsCompleted();
         todo.undoMarkAsCompleted(); // Revert the completion
@@ -94,7 +94,7 @@ public class TodoTest {
      * The LocalDateTime object can hold this precision even if not used elsewhere.
      */
     @Test
-    public void TestTodoWithPreciseDeadlineToDBRepresentation() {
+    public void TestTodoWithPreciseDeadlineToDbRepresentation() {
         Todo todo = new Todo("Midnight launch", LocalDateTime.of(2030, Month.JANUARY, 1, 0, 0, 0));
         String actual = todo.toDbRepresentation();
         String expected = "D|false|Midnight launch|2030-01-01T00:00";

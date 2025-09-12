@@ -17,7 +17,7 @@ public class DateTime {
      * @param dateTimeString a string that represents a datetime
      * @return a dateTime object representing the date of the string
      */
-    public static LocalDateTime parseStringToDate(String dateTimeString) {
+    public static LocalDateTime parseStringToDate(String dateTimeString) throws Exception {
         DateTimeFormatter isoLocalDate = new DateTimeFormatterBuilder()
                 .optionalStart().appendValue(ChronoField.YEAR, 4).optionalEnd()
                 .optionalStart().appendLiteral('/').optionalEnd()
@@ -72,7 +72,11 @@ public class DateTime {
         try {
             return LocalDateTime.parse(dateTimeString, isoDateTimeFormatter);
         } catch (Exception e) {
-            return LocalDateTime.parse(dateTimeString, dayMonthYearDateTimeFormatter);
+            try {
+                return LocalDateTime.parse(dateTimeString, dayMonthYearDateTimeFormatter);
+            } catch (Exception err) {
+                throw new Exception("The provided date is in an unsupported format. One of the supported formats is dd/mm/yy");
+            }
         }
     }
 }

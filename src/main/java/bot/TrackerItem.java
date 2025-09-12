@@ -21,7 +21,7 @@ public interface TrackerItem extends SavableToDb {
      * @param dbRepresentation the dbRepresentation of a tracker item
      * @return a tracker item derived from the dbRepresentation
      */
-    static TrackerItem fromDbRepresentation(String dbRepresentation) {
+    static TrackerItem fromDbRepresentation(String dbRepresentation) throws Exception {
         String[] entries = dbRepresentation.split("(\\s)*\\|(\\s)*");
 
         String itemType = entries[0];
