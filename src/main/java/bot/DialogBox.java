@@ -3,6 +3,7 @@ package bot;
 import java.io.IOException;
 import java.util.Collections;
 
+import bot.MainWindow;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -10,19 +11,23 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
 /**
  * Represents a dialog box consisting of an ImageView to represent the speaker's face
  * and a label containing text from the speaker.
  */
-public class MessageBox extends HBox {
+public class DialogBox extends HBox {
     @FXML
-    private Label message;
+    private Label dialog;
+    @FXML
+    private ImageView displayPicture;
 
-    private MessageBox(String text) {
+    private DialogBox(String text, Image img) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/MessageBox.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
             fxmlLoader.setController(this);
             fxmlLoader.setRoot(this);
             fxmlLoader.load();
@@ -30,7 +35,8 @@ public class MessageBox extends HBox {
             e.printStackTrace();
         }
 
-        message.setText(text);
+        dialog.setText(text);
+        displayPicture.setImage(img);
     }
 
     /**
@@ -43,12 +49,12 @@ public class MessageBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
-    public static MessageBox getUserMessageBox(String text) {
-        return new MessageBox(text);
+    public static DialogBox getUserDialog(String text, Image img) {
+        return new DialogBox(text, img);
     }
 
-    public static MessageBox getBotMessageBox(String text) {
-        var db = new MessageBox(text);
+    public static DialogBox getDukeDialog(String text, Image img) {
+        var db = new DialogBox(text, img);
         db.flip();
         return db;
     }

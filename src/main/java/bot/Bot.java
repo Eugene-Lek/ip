@@ -182,7 +182,7 @@ public class Bot {
 
         List<TrackerItem> matchedItems = tracker.find(matcher.group(1));
         if (matchedItems.isEmpty()) {
-            System.out.println("No items match the given query");
+            return "No items match the given query";
         }
 
         StringBuilder display = new StringBuilder();

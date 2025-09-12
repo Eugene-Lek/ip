@@ -23,9 +23,11 @@ public interface TrackerItem extends SavableToDb {
      */
     static TrackerItem fromDbRepresentation(String dbRepresentation) {
         String[] entries = dbRepresentation.split("(\\s)*\\|(\\s)*");
+
         String itemType = entries[0];
         boolean isCompleted = Boolean.parseBoolean(entries[1].toLowerCase());
         String itemName = entries[2];
+
         TrackerItem item;
         switch (itemType) {
         case "T":
